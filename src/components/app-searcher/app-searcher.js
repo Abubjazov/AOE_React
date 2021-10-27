@@ -1,3 +1,4 @@
+import { AppFilter } from '../app-filter/app-filter'
 import './app-searcher.css'
 
 export const AppSearcher = () => {
@@ -7,6 +8,7 @@ export const AppSearcher = () => {
             type="text" 
             className="form-control search-input"
             placeholder="Найти сотрудника"/>
+            <AppFilter />
         </div>
     )
 }
