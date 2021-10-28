@@ -3,11 +3,10 @@ import './app-employee-list.css'
 
 export const AppEmployeeList = () => {
     return (
-        <div className="app-employee-list">
+        <ul className="app-employee-list list-group">
             <AppEmployee />
             <AppEmployee />
             <AppEmployee />
-            <AppEmployee />
-        </div>
+        </ul>
     )
 }
