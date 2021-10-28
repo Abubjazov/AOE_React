@@ -6,10 +6,10 @@ import './app.css'
 
 export const App = () => {
     const employeeData = [
-        {name: 'Джон Константин', salary: 1200, increase: true},
-        {name: 'Джон Уик', salary: 3700, increase: false},
-        {name: 'Томас Андерсон', salary: 5000, increase: false},
-        {name: 'Кевин Ломакс', salary: 800, increase: true}
+        {key: 1, name: 'Джон Константин', salary: 1200, increase: true},
+        {key: 2, name: 'Джон Уик', salary: 3700, increase: false},
+        {key: 3, name: 'Томас Андерсон', salary: 5000, increase: false},
+        {key: 4, name: 'Кевин Ломакс', salary: 800, increase: true}
     ]
 
     return (
