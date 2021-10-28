@@ -1,11 +1,11 @@
 import './app-employee.css'
 
-export const AppEmployee = () => {
+export const AppEmployee = ({name, salary}) => {
     return (
         <li className="app-employee list-group-item d-flex justify-content-between">
-            <span className="list-group-item-label">Name Surname</span>
+            <span className="list-group-item-label">{name}</span>
 
-            <input type="text" className="list-group-item-input" defaultValue="1000$"/>
+            <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
 
             <div className="d-flex justify-content-center align-items-center">
                 <button className="btn-cookie btn-sm">

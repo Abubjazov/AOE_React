@@ -5,11 +5,19 @@ import { AppSearcher } from '../app-searcher/app-searcher'
 import './app.css'
 
 export const App = () => {
+    const employeeData = [
+        {name: 'Джон Константин', salary: 1200},
+        {name: 'Джон Уик', salary: 3700},
+        {name: 'Томас Андерсон', salary: 5000},
+        {name: 'Кевин Ломакс', salary: 800}
+    ]
+
     return (
         <div className="app">
             <AppInfo />
             <AppSearcher />
-            <AppEmployeeList />
+            <AppEmployeeList 
+                employeeData={employeeData}/>
             <AppEmployeeAddForm />    
         </div>
     )

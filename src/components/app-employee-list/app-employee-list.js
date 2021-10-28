@@ -1,12 +1,10 @@
 import { AppEmployee } from "../app-employee/app-employee"
 import './app-employee-list.css'
 
-export const AppEmployeeList = () => {
+export const AppEmployeeList = ({employeeData}) => {    
     return (
         <ul className="app-employee-list list-group">
-            <AppEmployee />
-            <AppEmployee />
-            <AppEmployee />
+            {employeeData.map((employee, index) => <AppEmployee key={employee.name + index} {...employee}/>)}
         </ul>
     )
 }
