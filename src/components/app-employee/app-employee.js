@@ -1,8 +1,8 @@
 import './app-employee.css'
 
-export const AppEmployee = ({name, salary}) => {
+export const AppEmployee = ({name, salary, increase}) => {
     return (
-        <li className="app-employee list-group-item d-flex justify-content-between">
+        <li className={increase ? `app-employee list-group-item d-flex justify-content-between increase` : `app-employee list-group-item d-flex justify-content-between`}>
             <span className="list-group-item-label">{name}</span>
 
             <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
