@@ -1,60 +1,36 @@
-import { Component } from 'react'
 import './app-employee.css'
 
-export class AppEmployee extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            increase: props.increase,
-            like: false
-        } 
-    }
+export const AppEmployee = (props) => { 
+    const {name, salary, increase, like, onDelete, onToggleIncrease, onToggleLike} = props
 
-    onIncrease = () => {
-        this.setState(({increase}) => ({
-            increase: !increase
-        }))
-    }
+    let empClassNames = 'app-employee list-group-item d-flex justify-content-between'
 
-    onEmployeeClick = () => {
-        this.setState(({like}) => ({
-            like: !like
-        }))
-    }
- 
-    render() {
-        const {name, salary, onDelete} = this.props
-        const {increase, like} = this.state
+    if (increase) {empClassNames += ' increase'}
+    if (like) {empClassNames += ' like'}
 
-        let empClassNames = 'app-employee list-group-item d-flex justify-content-between'
+    return (
+        <li className={empClassNames}>
+            <span 
+                className="list-group-item-label"
+                onClick={onToggleLike}>{name}</span>
 
-        if (increase) {empClassNames += ' increase'}
-        if (like) {empClassNames += ' like'}
+            <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
 
-        return (
-            <li className={empClassNames}>
-                <span 
-                    className="list-group-item-label"
-                    onClick={this.onEmployeeClick}>{name}</span>
-    
-                <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
-    
-                <div className="d-flex justify-content-center align-items-center">
-                    <button 
-                        className="btn-cookie btn-sm"
-                        onClick={this.onIncrease}>
-                        <i className="fas fa-cookie"></i>
-                    </button>
-    
-                    <button 
-                        className="btn-trash btn-sm"
-                        onClick={onDelete}>
-                        <i className="fas fa-trash"></i>
-                    </button>
-    
-                    <i className="fas fa-star"></i>
-                </div>
-            </li>
-        )
-    }
+            <div className="d-flex justify-content-center align-items-center">
+                <button 
+                    className="btn-cookie btn-sm"
+                    onClick={onToggleIncrease}>
+                    <i className="fas fa-cookie"></i>
+                </button>
+
+                <button 
+                    className="btn-trash btn-sm"
+                    onClick={onDelete}>
+                    <i className="fas fa-trash"></i>
+                </button>
+
+                <i className="fas fa-star"></i>
+            </div>
+        </li>
+    )
 }

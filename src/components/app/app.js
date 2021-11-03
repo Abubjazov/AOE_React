@@ -10,10 +10,10 @@ export class App extends Component {
         super(props)
         this.state = {
             employeeData: [
-                {key: 1, name: 'Джон Константин', salary: 1200, increase: true},
-                {key: 2, name: 'Джон Уик', salary: 3700, increase: false},
-                {key: 3, name: 'Томас Андерсон', salary: 5000, increase: false},
-                {key: 4, name: 'Кевин Ломакс', salary: 800, increase: true}
+                {key: 1, name: 'Джон Константин', salary: 1200, increase: true, like: true},
+                {key: 2, name: 'Джон Уик', salary: 3700, increase: false, like: false},
+                {key: 3, name: 'Томас Андерсон', salary: 5000, increase: false, like: false},
+                {key: 4, name: 'Кевин Ломакс', salary: 800, increase: true, like: false}
             ],
             maxKey: 5
         }
@@ -26,28 +26,61 @@ export class App extends Component {
                 maxKey: maxKey
             }
         })
-        console.log(this.state)
     }
-    
+
     addItem = (name, salary) => {
         this.setState(({employeeData, maxKey}) => {
-            const newArr = [...employeeData, {key: maxKey, name, salary, increase: false}];
+            const newArr = [...employeeData, {key: maxKey, name, salary, increase: false, like: false}];
             return {
                 employeeData: newArr,
                 maxKey: maxKey + 1
             }
         })
-        console.log(this.state)
+    }
+
+    onToggleIncrease = (key) => {
+        this.setState(({employeeData}) => ({
+            // Вариант 1:
+            // const index = employeeData.findIndex(elem => elem.key === key)
+
+            // return {
+            //     employeeData: [...employeeData.slice(0, index), {...employeeData[index], increase: !employeeData[index].increase}, ...employeeData.slice(index + 1)]
+            // }
+
+            employeeData: employeeData.map(item => {
+                if (item.key === key) {
+                    return {...item,  increase: !item.increase}
+                }
+                return item
+            })
+        }))
+    }
+
+    onToggleLike = (key) => {
+        this.setState(({employeeData}) => ({
+            employeeData: employeeData.map(item => {
+                if (item.key === key) {
+                    return {...item,  like: !item.like}
+                }
+                return item
+            })
+        }))
     }
 
     render() {
+        const employeeIncSum = this.state.employeeData.filter(item => item.increase === true).length
+
         return (
             <div className="app">
-                <AppInfo />
+                <AppInfo 
+                    employeeSum={this.state.employeeData.length}
+                    employeeIncSum={employeeIncSum}/>
                 <AppSearcher />
                 <AppEmployeeList 
                     employeeData={this.state.employeeData}
-                    onDelete={this.deleteItem}/>
+                    onDelete={this.deleteItem}
+                    onToggleIncrease={this.onToggleIncrease}
+                    onToggleLike={this.onToggleLike}/>
                 <AppEmployeeAddForm
                     onAdd={this.addItem}/>    
             </div>
