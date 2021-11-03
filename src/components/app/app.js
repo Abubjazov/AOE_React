@@ -38,7 +38,7 @@ export class App extends Component {
         })
     }
 
-    onToggleIncrease = (key) => {
+    onToggleProp = (key, prop) => {
         this.setState(({employeeData}) => ({
             // Вариант 1:
             // const index = employeeData.findIndex(elem => elem.key === key)
@@ -49,18 +49,7 @@ export class App extends Component {
 
             employeeData: employeeData.map(item => {
                 if (item.key === key) {
-                    return {...item,  increase: !item.increase}
-                }
-                return item
-            })
-        }))
-    }
-
-    onToggleLike = (key) => {
-        this.setState(({employeeData}) => ({
-            employeeData: employeeData.map(item => {
-                if (item.key === key) {
-                    return {...item,  like: !item.like}
+                    return {...item,  [prop]: !item[prop]}
                 }
                 return item
             })
@@ -79,8 +68,7 @@ export class App extends Component {
                 <AppEmployeeList 
                     employeeData={this.state.employeeData}
                     onDelete={this.deleteItem}
-                    onToggleIncrease={this.onToggleIncrease}
-                    onToggleLike={this.onToggleLike}/>
+                    onToggleProp={this.onToggleProp}/>
                 <AppEmployeeAddForm
                     onAdd={this.addItem}/>    
             </div>
