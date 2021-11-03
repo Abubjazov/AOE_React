@@ -14,14 +14,30 @@ export class App extends Component {
                 {key: 2, name: 'Джон Уик', salary: 3700, increase: false},
                 {key: 3, name: 'Томас Андерсон', salary: 5000, increase: false},
                 {key: 4, name: 'Кевин Ломакс', salary: 800, increase: true}
-            ]
+            ],
+            maxKey: 5
         }
     }
 
     deleteItem = (key) => {
-        this.setState(({employeeData}) => {
-            return {employeeData: employeeData.filter(item => item.key !== key)}
+        this.setState(({employeeData, maxKey}) => {
+            return {
+                employeeData: employeeData.filter(item => item.key !== key),
+                maxKey: maxKey
+            }
         })
+        console.log(this.state)
+    }
+    
+    addItem = (name, salary) => {
+        this.setState(({employeeData, maxKey}) => {
+            const newArr = [...employeeData, {key: maxKey, name, salary, increase: false}];
+            return {
+                employeeData: newArr,
+                maxKey: maxKey + 1
+            }
+        })
+        console.log(this.state)
     }
 
     render() {
@@ -32,7 +48,8 @@ export class App extends Component {
                 <AppEmployeeList 
                     employeeData={this.state.employeeData}
                     onDelete={this.deleteItem}/>
-                <AppEmployeeAddForm />    
+                <AppEmployeeAddForm
+                    onAdd={this.addItem}/>    
             </div>
         )
     }    
