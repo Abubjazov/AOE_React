@@ -21,12 +21,13 @@ export class AppSearcher extends Component {
         return (
             <div className="app-searcher">
                 <input 
-                type="text" 
-                className="form-control search-input"
-                placeholder="Найти сотрудника"
-                value={this.state.term}
-                onChange={this.onSearchUpdate}/>
-                <AppFilter />
+                    type="text" 
+                    className="form-control search-input"
+                    placeholder="Найти сотрудника"
+                    value={this.state.term}
+                    onChange={this.onSearchUpdate}/>
+                <AppFilter 
+                    onFilterUpdate={this.props.onFilterUpdate}/>
             </div>
         )
     }

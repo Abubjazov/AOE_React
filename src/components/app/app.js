@@ -16,7 +16,8 @@ export class App extends Component {
                 {key: 4, name: 'Кевин Ломакс', salary: 800, increase: true, like: false}
             ],
             maxKey: 5,
-            term: ''
+            term: '',
+            filter: 'all'
         }
     }
 
@@ -41,13 +42,6 @@ export class App extends Component {
 
     onToggleProp = (key, prop) => {
         this.setState(({employeeData}) => ({
-            // Вариант 1:
-            // const index = employeeData.findIndex(elem => elem.key === key)
-
-            // return {
-            //     employeeData: [...employeeData.slice(0, index), {...employeeData[index], increase: !employeeData[index].increase}, ...employeeData.slice(index + 1)]
-            // }
-
             employeeData: employeeData.map(item => {
                 if (item.key === key) {
                     return {...item,  [prop]: !item[prop]}
@@ -65,14 +59,25 @@ export class App extends Component {
         })
     }
 
+    filterEmp = (items, filter) => {
+        if (filter === 'all') {return items}
+        if (filter === 'liked') {return items.filter( item => item.like === true)}
+        if (filter === '1000') {return items.filter( item => item.salary > 1000)}
+    }
+
     onSearchUpdate = (term) => {
         this.setState({term})
     }
 
+    onFilterUpdate = (filter) => {
+        this.setState({filter})
+    }
+
     render() {
-        const {employeeData, term} = this.state
+        const {employeeData, term, filter} = this.state
         const employeeIncSum = this.state.employeeData.filter(item => item.increase === true).length
-        const visibleEmpData = this.searchEmp(employeeData, term)
+        let visibleEmpData = this.filterEmp(employeeData, filter)
+            visibleEmpData = this.searchEmp(visibleEmpData, term)
 
         return (
             <div className="app">
@@ -80,7 +85,8 @@ export class App extends Component {
                     employeeSum={this.state.employeeData.length}
                     employeeIncSum={employeeIncSum}/>
                 <AppSearcher 
-                    onSearchUpdate={this.onSearchUpdate}/>
+                    onSearchUpdate={this.onSearchUpdate}
+                    onFilterUpdate={this.onFilterUpdate}/>
                 <AppEmployeeList 
                     employeeData={visibleEmpData}
                     onDelete={this.deleteItem}
