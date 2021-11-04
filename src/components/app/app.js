@@ -51,6 +51,17 @@ export class App extends Component {
         }))
     }
 
+    onPropChange = (key, prop, newVal) => {
+        this.setState(({employeeData}) => ({
+            employeeData: employeeData.map(item => {
+                if (item.key === key) {
+                    return {...item,  [prop]: newVal}
+                }
+                return item
+            })
+        }))
+    }
+
     searchEmp = (items, term) => {
         if (term.length === 0) {return items}
 
@@ -97,7 +108,8 @@ export class App extends Component {
                 <AppEmployeeList 
                     employeeData={visibleEmpData}
                     onDelete={this.deleteItem}
-                    onToggleProp={this.onToggleProp}/>
+                    onToggleProp={this.onToggleProp}
+                    onPropChange={this.onPropChange}/>
                 <AppEmployeeAddForm
                     onAdd={this.addItem}/>    
             </div>

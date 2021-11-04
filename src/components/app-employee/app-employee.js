@@ -1,7 +1,7 @@
 import './app-employee.css'
 
 export const AppEmployee = (props) => { 
-    const {name, salary, increase, like, onDelete, onToggleProp} = props
+    const {name, salary, increase, like, onDelete, onToggleProp, onPropChange} = props
 
     let empClassNames = 'app-employee list-group-item d-flex justify-content-between'
 
@@ -15,7 +15,11 @@ export const AppEmployee = (props) => {
                 onClick={onToggleProp}
                 data-toggle="like">{name}</span>
 
-            <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
+            <input type="text" 
+                className="list-group-item-input" 
+                defaultValue={salary + '$'}
+                onChange={onPropChange}
+                data-change="salary"/>
 
             <div className="d-flex justify-content-center align-items-center">
                 <button 
