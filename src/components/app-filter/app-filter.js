@@ -16,7 +16,7 @@ export class AppFilter extends Component {
         this.props.onFilterUpdate(filter)
 
         e.target.parentNode.childNodes.forEach(elem =>  elem.className = 'btn btn-outline-light')
-        e.target.className = 'tn btn-light'
+        e.target.className = 'btn btn-light'
     }
 
     render() {
