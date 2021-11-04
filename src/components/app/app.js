@@ -92,7 +92,8 @@ export class App extends Component {
                     employeeIncSum={employeeIncSum}/>
                 <AppSearcher 
                     onSearchUpdate={this.onSearchUpdate}
-                    onFilterUpdate={this.onFilterUpdate}/>
+                    onFilterUpdate={this.onFilterUpdate}
+                    filter={this.state.filter}/>
                 <AppEmployeeList 
                     employeeData={visibleEmpData}
                     onDelete={this.deleteItem}

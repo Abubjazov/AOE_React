@@ -27,7 +27,8 @@ export class AppSearcher extends Component {
                     value={this.state.term}
                     onChange={this.onSearchUpdate}/>
                 <AppFilter 
-                    onFilterUpdate={this.props.onFilterUpdate}/>
+                    onFilterUpdate={this.props.onFilterUpdate}
+                    filter={this.props.filter}/>
             </div>
         )
     }
