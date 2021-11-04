@@ -11,33 +11,28 @@ export class AppFilter extends Component {
     }
 
     render() {
+        const buttonsArr = [
+            {name: 'all', label: 'Все сотрудники'},
+            {name: 'liked', label: 'На повышение'},
+            {name: '1000', label: 'З/П более 1000$'}
+        ]
+
+        const buttons = buttonsArr.map(({name, label}) => {
+            return (
+                <button 
+                    className={name === 'all' ? 'btn btn-light' : 'btn btn-outline-light'}
+                    type="button"
+                    data-filter={name}
+                    onClick={this.onFilterUpdate}>
+                        {label}
+                </button>
+            )
+        })
 
         return (
             <div className="app-filter">
                 <div className="btn-group">
-                    <button 
-                        className="btn btn-light"
-                        type="button"
-                        data-filter="all"
-                        onClick={this.onFilterUpdate}>
-                            Все сотрудники
-                    </button>
-    
-                    <button 
-                        className="btn btn-outline-light"
-                        type="button"
-                        data-filter="liked"
-                        onClick={this.onFilterUpdate}>
-                            На повышение
-                    </button>
-    
-                    <button 
-                        className="btn btn-outline-light"
-                        type="button"
-                        data-filter="1000"
-                        onClick={this.onFilterUpdate}>
-                            З/П более 1000$
-                    </button>
+                    {buttons}
                 </div>
             </div>
         )
