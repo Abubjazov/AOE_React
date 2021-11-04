@@ -15,7 +15,8 @@ export class App extends Component {
                 {key: 3, name: 'Томас Андерсон', salary: 5000, increase: false, like: false},
                 {key: 4, name: 'Кевин Ломакс', salary: 800, increase: true, like: false}
             ],
-            maxKey: 5
+            maxKey: 5,
+            term: ''
         }
     }
 
@@ -56,17 +57,32 @@ export class App extends Component {
         }))
     }
 
+    searchEmp = (items, term) => {
+        if (term.length === 0) {return items}
+
+        return items.filter(item => {
+            return item.name.toLowerCase().indexOf(term.toLowerCase()) > -1
+        })
+    }
+
+    onSearchUpdate = (term) => {
+        this.setState({term})
+    }
+
     render() {
+        const {employeeData, term} = this.state
         const employeeIncSum = this.state.employeeData.filter(item => item.increase === true).length
+        const visibleEmpData = this.searchEmp(employeeData, term)
 
         return (
             <div className="app">
                 <AppInfo 
                     employeeSum={this.state.employeeData.length}
                     employeeIncSum={employeeIncSum}/>
-                <AppSearcher />
+                <AppSearcher 
+                    onSearchUpdate={this.onSearchUpdate}/>
                 <AppEmployeeList 
-                    employeeData={this.state.employeeData}
+                    employeeData={visibleEmpData}
                     onDelete={this.deleteItem}
                     onToggleProp={this.onToggleProp}/>
                 <AppEmployeeAddForm
