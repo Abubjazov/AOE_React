@@ -17,7 +17,7 @@ export class App extends Component {
             ],
             maxKey: 5,
             term: '',
-            filter: ''
+            filter: 'all'
         }
     }
 

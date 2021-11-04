@@ -2,24 +2,16 @@ import { Component } from 'react'
 import './app-filter.css'
 
 export class AppFilter extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            filter: 'all'
-        }
-    }
-
     onFilterUpdate = (e) => {
         const filter = e.currentTarget.getAttribute('data-filter')
 
-        this.setState({filter})
         this.props.onFilterUpdate(filter)
-
         e.target.parentNode.childNodes.forEach(elem =>  elem.className = 'btn btn-outline-light')
         e.target.className = 'btn btn-light'
     }
 
     render() {
+
         return (
             <div className="app-filter">
                 <div className="btn-group">
