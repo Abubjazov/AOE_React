@@ -17,7 +17,7 @@ export class App extends Component {
             ],
             maxKey: 5,
             term: '',
-            filter: 'all'
+            filter: ''
         }
     }
 
@@ -60,9 +60,16 @@ export class App extends Component {
     }
 
     filterEmp = (items, filter) => {
-        if (filter === 'all') {return items}
-        if (filter === 'liked') {return items.filter( item => item.like === true)}
-        if (filter === '1000') {return items.filter( item => item.salary > 1000)}
+        switch (filter) {
+            case 'liked':
+                return items.filter(item => item.like)
+
+            case '1000':
+                return items.filter(item => item.salary > 1000)
+        
+            default:
+                return items
+        }
     }
 
     onSearchUpdate = (term) => {
@@ -76,8 +83,7 @@ export class App extends Component {
     render() {
         const {employeeData, term, filter} = this.state
         const employeeIncSum = this.state.employeeData.filter(item => item.increase === true).length
-        let visibleEmpData = this.filterEmp(employeeData, filter)
-            visibleEmpData = this.searchEmp(visibleEmpData, term)
+        let visibleEmpData = this.filterEmp(this.searchEmp(employeeData, term), filter)
 
         return (
             <div className="app">

@@ -14,7 +14,8 @@ export const AppEmployeeList = ({employeeData, onDelete, onToggleProp}) => {
 
     return (
         <ul className="app-employee-list list-group">
-            {elements}
+            {elements.length > 0 ? elements : <li className="app-employee list-group-item d-flex justify-content-between"><span className="list-group-item-label">Сотрудники не найдены</span></li>}
         </ul>
     )
 }
+
