@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import './app-employee-addform.css'
+import './app-employee-addform.scss'
 
 export class AppEmployeeAddForm extends Component {
     constructor(props) {

@@ -3,7 +3,7 @@ import { AppEmployeeAddForm } from '../app-employee-addform/app-employee-addform
 import { AppEmployeeList } from '../app-employee-list/app-employee-list'
 import { AppInfo } from '../app-info/app-info'
 import { AppSearcher } from '../app-searcher/app-searcher'
-import './app.css'
+import './app.scss'
 
 export class App extends Component {
     constructor(props) {
